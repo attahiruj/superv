@@ -1,0 +1,36 @@
+[package]
+name = "superv"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+description.workspace = true
+repository.workspace = true
+
+[dependencies]
+async-channel = "2.5.0"
+emojis = "0.9.1"
+gtk4 = { version = "0.11.5", features = ["v4_14"] }
+gtk4-layer-shell = "0.8.1"
+serde = { version = "1.0.229", features = ["derive"] }
+superv-core = { version = "0.1.0", path = "../superv-core" }
+toml = "1.2.1"
+
+[package.metadata.deb]
+name = "superv"
+maintainer = "Attahiru Jibril"
+section = "utils"
+priority = "optional"
+extended-description = "A Win+V-style clipboard history with an emoji picker. Starts at login and, on GNOME, sets up its Shell extension automatically."
+depends = "$auto, libgtk-4-1 (>= 4.14), libgtk4-layer-shell0"
+recommends = "wl-clipboard"
+assets = [
+    ["target/release/superv", "usr/bin/", "755"],
+    ["../../packaging/io.superv.Clipboard.desktop", "usr/share/applications/", "644"],
+    ["../../packaging/io.superv.Clipboard.autostart.desktop", "etc/xdg/autostart/io.superv.Clipboard.desktop", "644"],
+    ["../../packaging/io.superv.Clipboard.service", "usr/share/dbus-1/services/", "644"],
+    ["../../packaging/io.superv.Clipboard.svg", "usr/share/icons/hicolor/scalable/apps/", "644"],
+    ["../../packaging/io.superv.Clipboard.metainfo.xml", "usr/share/metainfo/", "644"],
+    ["../../README.md", "usr/share/doc/superv/README.md", "644"],
+    ["../../LICENSE", "usr/share/doc/superv/copyright", "644"],
+]

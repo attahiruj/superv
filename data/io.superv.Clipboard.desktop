@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Clipboard History
+Comment=Win+V style clipboard history
+Exec=superv --toggle
+Icon=edit-paste
+Categories=Utility;
+StartupNotify=false
+DBusActivatable=true

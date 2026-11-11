@@ -1,0 +1,14 @@
+[workspace]
+resolver = "2"
+members = ["crates/superv","crates/superv-core"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+authors = ["Attahiru Jibril"]
+description = "Win+V-style clipboard history and emoji picker for Linux (GTK4)"
+repository = "https://github.com/attahiruj/superv"
+homepage = "https://github.com/attahiruj/superv"
+keywords = ["clipboard", "gtk4", "wayland", "linux"]
+categories = ["command-line-utilities"]

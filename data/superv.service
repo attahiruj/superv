@@ -1,0 +1,11 @@
+[Unit]
+Description=superv clipboard history daemon
+After=graphical-session.target
+PartOf=graphical-session.target
+
+[Service]
+ExecStart=%h/.cargo/bin/superv --daemon
+Restart=on-failure
+
+[Install]
+WantedBy=graphical-session.target

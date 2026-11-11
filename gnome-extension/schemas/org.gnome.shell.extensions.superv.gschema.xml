@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+  <schema id="org.gnome.shell.extensions.superv" path="/org/gnome/shell/extensions/superv/">
+    <key name="toggle" type="as">
+      <default><![CDATA[['<Super>v']]]></default>
+      <summary>Toggle the clipboard popup</summary>
+    </key>
+  </schema>
+</schemalist>

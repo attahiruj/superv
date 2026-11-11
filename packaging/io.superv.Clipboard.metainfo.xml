@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>io.superv.Clipboard</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>MIT</project_license>
+  <name>superv</name>
+  <summary>Clipboard history and emoji picker</summary>
+  <description>
+    <p>A Win+V-style clipboard history for Linux. Copy text and images, then open the popup with a hotkey to paste any of them again. Pin items, search your history, and pick emoji and symbols.</p>
+    <p>superv records everything you copy, including passwords. History is stored locally and never leaves your machine.</p>
+  </description>
+  <launchable type="desktop-id">io.superv.Clipboard.desktop</launchable>
+  <url type="homepage">https://github.com/attahiruj/superv</url>
+  <url type="bugtracker">https://github.com/attahiruj/superv/issues</url>
+  <developer_name>Attahiru Jibril</developer_name>
+  <categories><category>Utility</category></categories>
+  <content_rating type="oars-1.1"/>
+  <releases>
+    <release version="0.1.0" date="2026-11-11"/>
+  </releases>
+</component>

@@ -1,0 +1,7 @@
+{
+  "uuid": "superv@hiro",
+  "name": "superv clipboard bridge",
+  "description": "Feeds clipboard changes to the superv clipboard history app and provides a global shortcut (Mutter has no data-control protocol).",
+  "shell-version": ["45", "46", "47", "48", "49", "50"],
+  "settings-schema": "org.gnome.shell.extensions.superv"
+}

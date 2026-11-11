@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=superv
+Comment=Clipboard history daemon
+Exec=superv --daemon
+Icon=io.superv.Clipboard
+NoDisplay=true
+X-GNOME-Autostart-enabled=true

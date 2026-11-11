@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=superv
+GenericName=Clipboard History
+Comment=Clipboard history and emoji picker
+Exec=superv --toggle
+Icon=io.superv.Clipboard
+Categories=Utility;
+Keywords=clipboard;history;paste;emoji;
+StartupNotify=false
+DBusActivatable=true

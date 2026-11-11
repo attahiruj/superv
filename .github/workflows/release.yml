@@ -1,0 +1,20 @@
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+
+jobs:
+  deb:
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - run: sudo apt-get update && sudo apt-get install -y libgtk-4-dev libgtk4-layer-shell-dev
+      - run: cargo install cargo-deb --locked
+      - run: cargo deb -p superv
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: target/debian/*.deb

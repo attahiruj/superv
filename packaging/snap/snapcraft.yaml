@@ -1,0 +1,33 @@
+# UNTESTED draft. Build with `snapcraft` from the repo root (symlink or copy to ./snap/snapcraft.yaml).
+# Classic confinement is required: the app installs the GNOME Shell extension into
+# ~/.local/share/gnome-shell and edits org.gnome.shell settings, which strict confinement blocks.
+# Classic snaps need manual approval from the Snap Store reviewers.
+name: superv
+base: core24
+version: "0.1.0"
+summary: Clipboard history and emoji picker
+description: |
+  A Win+V-style clipboard history for Linux. Records everything you copy (including
+  passwords), stored locally. Open with Super+V on GNOME.
+license: MIT
+grade: stable
+confinement: classic
+
+apps:
+  superv:
+    command: bin/superv
+    desktop: share/applications/io.superv.Clipboard.desktop
+    autostart: io.superv.Clipboard.desktop
+
+parts:
+  superv:
+    plugin: rust
+    source: .
+    rust-channel: stable
+    build-packages: [libgtk-4-dev, libgtk4-layer-shell-dev, pkg-config]
+    stage-packages: [libgtk-4-1, libgtk4-layer-shell0, libglib2.0-bin, wl-clipboard]
+    override-build: |
+      craftctl default
+      install -Dm644 packaging/io.superv.Clipboard.desktop -t $CRAFT_PART_INSTALL/share/applications
+      install -Dm644 packaging/io.superv.Clipboard.svg -t $CRAFT_PART_INSTALL/share/icons/hicolor/scalable/apps
+      install -Dm644 packaging/io.superv.Clipboard.metainfo.xml -t $CRAFT_PART_INSTALL/share/metainfo

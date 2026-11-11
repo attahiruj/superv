@@ -1,0 +1,48 @@
+# UNTESTED draft. Build: flatpak-builder --user --install --force-clean build packaging/flatpak/io.superv.Clipboard.yml
+# For Flathub, generate offline cargo sources first (flatpak-cargo-generator.py Cargo.lock -o packaging/flatpak/cargo-sources.json)
+# and uncomment the cargo-sources.json line plus remove --share=network.
+app-id: io.superv.Clipboard
+runtime: org.gnome.Platform
+runtime-version: "49"
+sdk: org.gnome.Sdk
+sdk-extensions: [org.freedesktop.Sdk.Extension.rust-stable]
+command: superv
+finish-args:
+  - --socket=wayland
+  - --socket=fallback-x11
+  - --share=ipc
+  # Needed to install/enable the GNOME Shell extension on first run, and to talk to it.
+  - --filesystem=xdg-data/gnome-shell/extensions:create
+  - --filesystem=xdg-run/dconf
+  - --filesystem=~/.config/dconf:ro
+  - --talk-name=ca.desrt.dconf
+  - --env=DCONF_USER_CONFIG_DIR=.config/dconf
+  - --talk-name=io.superv.Bridge
+build-options:
+  append-path: /usr/lib/sdk/rust-stable/bin
+  env:
+    CARGO_HOME: /run/build/superv/cargo
+modules:
+  - name: gtk4-layer-shell
+    buildsystem: meson
+    config-opts: [-Dexamples=false, -Ddocs=false, -Dtests=false]
+    sources:
+      - type: git
+        url: https://github.com/wmww/gtk4-layer-shell.git
+        tag: v1.3.0
+  - name: superv
+    buildsystem: simple
+    build-options:
+      build-args: [--share=network]
+    build-commands:
+      - cargo build --release --locked -p superv
+      - install -Dm755 target/release/superv /app/bin/superv
+      - install -Dm644 packaging/io.superv.Clipboard.desktop -t /app/share/applications
+      - install -Dm644 packaging/io.superv.Clipboard.svg -t /app/share/icons/hicolor/scalable/apps
+      - install -Dm644 packaging/io.superv.Clipboard.metainfo.xml -t /app/share/metainfo
+      - sed 's|/usr/bin/superv|/app/bin/superv|' packaging/io.superv.Clipboard.service > io.superv.Clipboard.service
+      - install -Dm644 io.superv.Clipboard.service -t /app/share/dbus-1/services
+    sources:
+      - type: dir
+        path: ../..
+      # - cargo-sources.json
